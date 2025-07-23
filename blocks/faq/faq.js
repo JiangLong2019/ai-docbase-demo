@@ -80,10 +80,13 @@ export default function decorate(block) {
   const firstAnswer = faqContainer.querySelector('.faq-answer');
 
   if (firstQuestion && firstAnswer) {
-    // Set the first item as expanded
-    firstQuestion.setAttribute('aria-expanded', 'true');
-    firstQuestion.querySelector('.faq-toggle-icon').textContent = '−';
-    firstAnswer.setAttribute('aria-hidden', 'false');
-    firstAnswer.style.maxHeight = `${firstAnswer.scrollHeight}px`;
+    // Use setTimeout to ensure DOM is fully rendered
+    setTimeout(() => {
+      // Set the first item as expanded
+      firstQuestion.setAttribute('aria-expanded', 'true');
+      firstQuestion.querySelector('.faq-toggle-icon').textContent = '−';
+      firstAnswer.setAttribute('aria-hidden', 'false');
+      firstAnswer.style.maxHeight = `${firstAnswer.scrollHeight}px`;
+    }, 10);
   }
 }
