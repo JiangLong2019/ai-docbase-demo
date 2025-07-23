@@ -1,7 +1,7 @@
 export default function decorate(block) {
   // Convert the block structure to semantic FAQ HTML
-  const faqContainer = document.createElement('div');
-  faqContainer.className = 'faq-container';
+  const faqsContainer = document.createElement('div');
+  faqsContainer.className = 'faqs';
 
   [...block.children].forEach((row, index) => {
     if (row.children.length >= 2) {
@@ -12,81 +12,96 @@ export default function decorate(block) {
       const faqItem = document.createElement('div');
       faqItem.className = 'faq-item';
 
-      // Create question button
-      const questionButton = document.createElement('button');
-      questionButton.className = 'faq-question';
-      questionButton.setAttribute('aria-expanded', 'false');
-      questionButton.setAttribute('aria-controls', `faq-answer-${index}`);
-      questionButton.innerHTML = `
-        <span class="faq-question-text">${question.textContent.trim()}</span>
-        <span class="faq-toggle-icon" aria-hidden="true">+</span>
-      `;
+      // Create question title
+      const faqTitle = document.createElement('button');
+      faqTitle.className = 'faq-title';
+      faqTitle.setAttribute('aria-expanded', 'false');
+      faqTitle.setAttribute('aria-controls', `faq-content-${index}`);
 
-      // Create answer container
-      const answerContainer = document.createElement('div');
-      answerContainer.className = 'faq-answer';
-      answerContainer.id = `faq-answer-${index}`;
-      answerContainer.setAttribute('aria-hidden', 'true');
+      // Create title left section
+      const titleLeft = document.createElement('div');
+      titleLeft.className = 'faq-title-left';
+      titleLeft.innerHTML = question.innerHTML;
 
-      const answerContent = document.createElement('div');
-      answerContent.className = 'faq-answer-content';
-      answerContent.innerHTML = answer.innerHTML;
+      // Create title right section (toggle icon)
+      const titleRight = document.createElement('div');
+      titleRight.className = 'faq-title-right';
+      titleRight.setAttribute('aria-hidden', 'true');
+      titleRight.textContent = '+';
 
-      answerContainer.appendChild(answerContent);
+      faqTitle.appendChild(titleLeft);
+      faqTitle.appendChild(titleRight);
+
+      // Create answer content
+      const faqContent = document.createElement('div');
+      faqContent.className = 'faq-content';
+      faqContent.id = `faq-content-${index}`;
+      faqContent.setAttribute('aria-hidden', 'true');
+
+      const contentPanel = document.createElement('div');
+      contentPanel.className = 'faq-content-panel';
+
+      const contentWrapper = document.createElement('div');
+      contentWrapper.className = 'faq-content-wrapper';
+      contentWrapper.innerHTML = answer.innerHTML;
+
+      contentPanel.appendChild(contentWrapper);
+      faqContent.appendChild(contentPanel);
 
       // Add click handler for expand/collapse
-      questionButton.addEventListener('click', () => {
-        const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
+      faqTitle.addEventListener('click', () => {
+        const isExpanded = faqTitle.getAttribute('aria-expanded') === 'true';
 
         // Close all other FAQ items
-        block.querySelectorAll('.faq-question').forEach((btn) => {
-          if (btn !== questionButton) {
+        block.querySelectorAll('.faq-title').forEach((btn) => {
+          if (btn !== faqTitle) {
             btn.setAttribute('aria-expanded', 'false');
-            btn.querySelector('.faq-toggle-icon').textContent = '+';
-            const targetAnswer = document.getElementById(btn.getAttribute('aria-controls'));
-            if (targetAnswer) {
-              targetAnswer.setAttribute('aria-hidden', 'true');
-              targetAnswer.style.maxHeight = '0';
+            btn.closest('.faq-item').classList.remove('visible');
+            btn.querySelector('.faq-title-right').textContent = '+';
+            const targetContent = document.getElementById(btn.getAttribute('aria-controls'));
+            if (targetContent) {
+              targetContent.setAttribute('aria-hidden', 'true');
             }
           }
         });
 
         // Toggle current item
         if (!isExpanded) {
-          questionButton.setAttribute('aria-expanded', 'true');
-          questionButton.querySelector('.faq-toggle-icon').textContent = '−';
-          answerContainer.setAttribute('aria-hidden', 'false');
-          answerContainer.style.maxHeight = `${answerContainer.scrollHeight}px`;
+          faqTitle.setAttribute('aria-expanded', 'true');
+          faqItem.classList.add('visible');
+          titleRight.textContent = '−';
+          faqContent.setAttribute('aria-hidden', 'false');
         } else {
-          questionButton.setAttribute('aria-expanded', 'false');
-          questionButton.querySelector('.faq-toggle-icon').textContent = '+';
-          answerContainer.setAttribute('aria-hidden', 'true');
-          answerContainer.style.maxHeight = '0';
+          faqTitle.setAttribute('aria-expanded', 'false');
+          faqItem.classList.remove('visible');
+          titleRight.textContent = '+';
+          faqContent.setAttribute('aria-hidden', 'true');
         }
       });
 
-      faqItem.appendChild(questionButton);
-      faqItem.appendChild(answerContainer);
-      faqContainer.appendChild(faqItem);
+      faqItem.appendChild(faqTitle);
+      faqItem.appendChild(faqContent);
+      faqsContainer.appendChild(faqItem);
     }
   });
 
   // Replace block content
   block.textContent = '';
-  block.appendChild(faqContainer);
+  block.appendChild(faqsContainer);
 
   // Auto-expand the first FAQ item by default
-  const firstQuestion = faqContainer.querySelector('.faq-question');
-  const firstAnswer = faqContainer.querySelector('.faq-answer');
+  const firstTitle = faqsContainer.querySelector('.faq-title');
+  const firstItem = faqsContainer.querySelector('.faq-item');
+  const firstContent = faqsContainer.querySelector('.faq-content');
 
-  if (firstQuestion && firstAnswer) {
+  if (firstTitle && firstItem && firstContent) {
     // Use setTimeout to ensure DOM is fully rendered
     setTimeout(() => {
       // Set the first item as expanded
-      firstQuestion.setAttribute('aria-expanded', 'true');
-      firstQuestion.querySelector('.faq-toggle-icon').textContent = '−';
-      firstAnswer.setAttribute('aria-hidden', 'false');
-      firstAnswer.style.maxHeight = `${firstAnswer.scrollHeight}px`;
+      firstTitle.setAttribute('aria-expanded', 'true');
+      firstItem.classList.add('visible');
+      firstTitle.querySelector('.faq-title-right').textContent = '−';
+      firstContent.setAttribute('aria-hidden', 'false');
     }, 10);
   }
 }

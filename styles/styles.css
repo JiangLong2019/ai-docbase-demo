@@ -29,6 +29,10 @@
     --faq-bg-subtle: #f0f0f0;
     --faq-bg-expanded: #fafafa;
 
+    /* font weights */
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+
     /* fonts */
     --body-font-family: roboto, roboto-fallback, sans-serif;
     --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
