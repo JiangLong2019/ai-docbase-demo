@@ -74,4 +74,16 @@ export default function decorate(block) {
   // Replace block content
   block.textContent = '';
   block.appendChild(faqContainer);
+
+  // Auto-expand the first FAQ item by default
+  const firstQuestion = faqContainer.querySelector('.faq-question');
+  const firstAnswer = faqContainer.querySelector('.faq-answer');
+
+  if (firstQuestion && firstAnswer) {
+    // Set the first item as expanded
+    firstQuestion.setAttribute('aria-expanded', 'true');
+    firstQuestion.querySelector('.faq-toggle-icon').textContent = '−';
+    firstAnswer.setAttribute('aria-hidden', 'false');
+    firstAnswer.style.maxHeight = `${firstAnswer.scrollHeight}px`;
+  }
 }
