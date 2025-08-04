@@ -1,4 +1,4 @@
-/* FAQ Block Styles */
+/* FAQ Block Styles - Terri Scheer Inspired */
 
 .faq-container {
     max-width: 1200px;
@@ -8,6 +8,18 @@
     grid-template-columns: 1fr 300px;
     gap: 40px;
     align-items: start;
+}
+
+
+/* Terri Scheer style classes */
+
+.style {
+    /* Additional styling for Terri Scheer compatibility */
+}
+
+.full-width {
+    width: 100%;
+    max-width: none;
 }
 
 

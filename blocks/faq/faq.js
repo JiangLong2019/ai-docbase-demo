@@ -12,6 +12,12 @@ export default function decorate(block) {
     title.textContent = 'FAQs';
     header.appendChild(title);
 
+    // Add style and full-width classes like Terri Scheer
+    const styleDiv = document.createElement('div');
+    styleDiv.className = 'style';
+    const fullWidthDiv = document.createElement('div');
+    fullWidthDiv.className = 'full-width';
+
     // Create categories section
     const categoriesSection = document.createElement('div');
     categoriesSection.className = 'faq-categories';
