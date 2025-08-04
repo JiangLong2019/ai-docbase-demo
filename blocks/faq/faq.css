@@ -110,6 +110,9 @@
     font-weight: 500;
     color: #333;
     transition: background-color 0.3s ease;
+    /* Always show the question button */
+    visibility: visible;
+    opacity: 1;
 }
 
 .faq-question:hover {
@@ -135,11 +138,17 @@
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
     background-color: #f8f9fa;
+    /* Hide answer by default */
+    opacity: 0;
+    visibility: hidden;
 }
 
 .faq-answer.active {
     max-height: 500px;
     padding: 20px 24px;
+    /* Show answer when active */
+    opacity: 1;
+    visibility: visible;
 }
 
 .faq-answer p {

@@ -6,7 +6,7 @@ A responsive FAQ (Frequently Asked Questions) block component for the EDS codeba
 
 - **Terri Scheer Design**: Matches the visual design and layout of the Terri Scheer FAQ page
 - **Category Filtering**: Filter FAQ items by categories with pill-shaped buttons
-- **Expandable Answers**: Click to expand/collapse FAQ answers with smooth animations
+- **Expandable Answers**: Click on question titles to show/hide answers with smooth animations
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 - **Sticky Sidebar**: Contact support sidebar that sticks to the top on desktop
 - **Professional UI**: Clean, modern design with smooth transitions
@@ -39,8 +39,8 @@ The EDS FAQ block expects a specific HTML structure where each FAQ item is a row
 ### Structure Breakdown
 
 1. **First Column**: Category name (used for filtering)
-2. **Second Column**: Question text (displayed as clickable button)
-3. **Third Column**: Answer text (hidden by default, shown when clicked)
+2. **Second Column**: Question text (displayed as clickable title)
+3. **Third Column**: Answer text (hidden by default, shown when title is clicked)
 
 ## Usage
 
@@ -107,6 +107,15 @@ The JavaScript transforms the input HTML into this structure:
     </div>
 </div>
 ```
+
+## Behavior
+
+### Default State
+- **Question titles are always visible** by default
+- **Answers are hidden** initially and only shown when clicked
+- **Click to expand**: Click on any question title to show the answer
+- **Click to collapse**: Click again to hide the answer
+- **Auto-close**: Only one answer can be open at a time
 
 ## Design Features
 

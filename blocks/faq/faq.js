@@ -75,6 +75,7 @@ export default function decorate(block) {
             answerDiv.className = 'faq-answer';
             answerDiv.innerHTML = `<p>${answer}</p>`;
 
+            // Show question by default, hide answer initially
             faqItem.appendChild(questionBtn);
             faqItem.appendChild(answerDiv);
             faqItems.appendChild(faqItem);
