@@ -1,0 +1,249 @@
+/* EDS FAQ Block Styles - Terri Scheer Inspired */
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: start;
+}
+
+
+/* Header Styles */
+
+.faq-header {
+    grid-column: 1 / -1;
+    margin-bottom: 40px;
+}
+
+.faq-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+
+/* Categories Styles */
+
+.faq-categories {
+    grid-column: 1 / -1;
+    margin-bottom: 40px;
+}
+
+.categories-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.category-btn {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.category-btn:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #212529;
+}
+
+.category-btn.active {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+
+/* Content Area Styles */
+
+.faq-content {
+    grid-column: 1;
+}
+
+.faq-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 24px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #f8f9fa;
+}
+
+.question-text {
+    flex: 1;
+    margin-right: 16px;
+}
+
+.expand-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    transition: transform 0.3s ease;
+    min-width: 20px;
+    text-align: center;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.faq-answer.active {
+    max-height: 500px;
+    padding: 20px 24px;
+}
+
+.faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+    color: #495057;
+}
+
+
+/* Sidebar Styles */
+
+.faq-sidebar {
+    grid-column: 2;
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar-content {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+}
+
+.sidebar-content h3 {
+    margin: 0 0 16px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.sidebar-content p {
+    margin: 0 0 20px 0;
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+.contact-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.contact-btn:hover {
+    background: #0056b3;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .faq-container {
+        grid-template-columns: 1fr;
+        padding: 20px 16px;
+        gap: 24px;
+    }
+    .faq-header h1 {
+        font-size: 2rem;
+    }
+    .categories-list {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+    .category-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .faq-sidebar {
+        grid-column: 1;
+        position: static;
+    }
+    .faq-question {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+    .faq-answer.active {
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-container {
+        padding: 16px 12px;
+    }
+    .faq-header h1 {
+        font-size: 1.75rem;
+    }
+    .category-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .faq-question {
+        padding: 14px 16px;
+    }
+    .faq-answer.active {
+        padding: 14px 16px;
+    }
+}
